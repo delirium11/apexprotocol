@@ -1,0 +1,62 @@
+@font-face 
+{
+    font-family: Bungee-Regular;
+    src: url(../public/fonts/Bungee-Regular.ttf);
+}
+
+@font-face 
+{
+    font-family: Roboto-Bold;
+    src: url(../public/fonts/Roboto-Bold.ttf);
+}
+
+::-webkit-scrollbar
+{
+    display: none;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, 
+body
+{
+    overflow-x: clip;
+    font-family: Roboto-Bold;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html
+{
+    scroll-behavior: smooth;
+}
+
+body
+{
+    background-color: #f3e9ce;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+img
+{
+    display: block;
+}
+
+input
+{
+    font-family: Bungee-Regular;
+}
+
+button
+{
+    font-family: Roboto-Bold;
+}
