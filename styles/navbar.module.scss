@@ -7,10 +7,8 @@
 
     background-color: #cfbe96;
     height: 3.75rem;
-    margin: 1rem 20vw;
+    margin: 1rem 25vw;
     min-width: fit-content;
-
-    padding: 0 .4rem;
     border-radius: .4rem;
 
     ul
@@ -19,7 +17,7 @@
         overflow: clip;
         height: 100%;
         width: 100%;
-        padding: 0 0.2rem;
+        padding: 0.4rem;
 
         &:first-child
         {
@@ -30,7 +28,7 @@
                 border-radius: .4rem;
                 overflow: clip;
 
-                height: 75%;
+                height: 100%;
                 aspect-ratio: 1/1;
 
                 img
@@ -107,8 +105,6 @@
 
         ul
         {
-            padding: 0;
-
             button
             {
                 display: none;
