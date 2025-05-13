@@ -65,7 +65,7 @@
 .mintPageContainer
 {
     @include mixins.flex-center(column);
-    margin-top: 4rem;
+    margin-top: 10rem;
     opacity: 0;
 
     section

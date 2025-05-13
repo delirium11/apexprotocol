@@ -87,8 +87,8 @@ export default function Navbar(): React.ReactElement
 
             <ul>
                 <Link href='/'>HOME</Link>
-                <Link href='/#about'>ABOUT</Link>
-                <Link href='/#faq'>FAQ</Link>
+                <Link href='/about'>ABOUT</Link>
+                <Link href='/faq'>FAQ</Link>
                 <Link href='/checker'>CHECKER</Link>
                 <Link href='/mint'>MINT</Link>
             </ul>

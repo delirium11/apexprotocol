@@ -1,6 +1,7 @@
 import styles from '@/styles/navbar.module.scss';
 
-export function navbarAnimations(): void
+//ANIMATIONS TO BE APPLIED TO THE NAVBAR
+export function navbarAnimation (): void 
 {
-    //FUNCTION BODY
+    //FUNCTION BODY GOES HERE
 }

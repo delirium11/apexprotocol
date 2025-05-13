@@ -63,7 +63,7 @@ export default function MintPage (): React.ReactElement
 
     return (
         <>
-            {
+            {/* {
                 !pageMount &&
                 <div className={`${styles.mintLoadContainer} ${fadeOut && styles.fadeOut}`}>
                     <div className={styles.mintLoaderWrapper}>
@@ -73,9 +73,9 @@ export default function MintPage (): React.ReactElement
                         ></div>
                     </div>
                 </div>
-            }
+            } */}
             {
-                pageMount && 
+                // pageMount && 
                 <AbstractProvider><MintLogic/></AbstractProvider>
             }
         </>
@@ -85,7 +85,7 @@ export default function MintPage (): React.ReactElement
 function MintLogic(): React.ReactElement
 {
     //Opacity animation that triggers after component mount.
-    const [fadeIn, setFadeIn] = useState<boolean>(false);
+    const [fadeIn, setFadeIn] = useState<boolean>(true);
 
     //Contract initializer state variables.
     const [eventContract, setEventContract] = useState<Contract | null>(null);
@@ -134,8 +134,8 @@ function MintLogic(): React.ReactElement
         () =>
         {
             //A second after mounting activate the fade in animation.
-            const fadeTimeout = setTimeout(() => setFadeIn(true), 1000);
-            return () => clearTimeout(fadeTimeout);
+            // const fadeTimeout = setTimeout(() => setFadeIn(true), 1000);
+            // return () => clearTimeout(fadeTimeout);
         }, []
     )
 

@@ -1,3 +1,5 @@
+@use '../styles/mixins';
+
 @font-face 
 {
     font-family: Bungee-Regular;
@@ -8,6 +10,12 @@
 {
     font-family: Roboto-Bold;
     src: url(../public/fonts/Roboto-Bold.ttf);
+}
+
+@font-face 
+{
+    font-family: BebasNeue-Regular;
+    src: url(../public/fonts/BebasNeue-Regular.ttf);
 }
 
 ::-webkit-scrollbar
@@ -34,16 +42,23 @@ body
 html
 {
     scroll-behavior: smooth;
+    width: 100vw;
+    height: 100svh;
 }
 
 body
 {
-    background-color: #f3e9ce;
+    background-color: white;
 }
 
 a
 {
     text-decoration: none;
+}
+
+h2
+{
+    font-family: BebasNeue-Regular;
 }
 
 img

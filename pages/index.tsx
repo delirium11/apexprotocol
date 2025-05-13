@@ -1,7 +1,5 @@
 import styles from '@/styles/index.module.scss';
 import bundle from '@/bundles/barrel_index';
-import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Home(): React.ReactElement
 {
@@ -9,7 +7,11 @@ export default function Home(): React.ReactElement
 
         <main id='home' className={styles.homeContainer}>
 
-            {/* PAGE CONTENT GOES HERE */}
+            <section id='catalog' className={styles.catalogContainer}>
+
+                {/* CATALOG CONTENT GOES HERE */}
+
+            </section>
 
         </main>
 
