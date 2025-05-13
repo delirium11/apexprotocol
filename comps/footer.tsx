@@ -5,7 +5,11 @@ export default function Footer(): React.ReactElement
 {
     return (
 
-        <footer></footer>
+        <footer id='footer' className={styles.footerContainer}>
+
+            {/* FOOTER CONTENT GOES HERE */}
+
+        </footer>
 
     )
 }

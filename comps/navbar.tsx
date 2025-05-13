@@ -2,9 +2,15 @@ import styles from '@/styles/navbar.module.scss';
 import bundle from '@/bundles/barrel_navbar';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaDiscord, FaXTwitter } from 'react-icons/fa6';
-import { collectUsers, connectUsers, disconnectUsers, extractErrorMessage } from '@/utilities/contract';
 import { useEffect, useState } from 'react';
+import { FaDiscord, FaXTwitter } from 'react-icons/fa6';
+import 
+{ 
+    collectUsers, 
+    connectUsers, 
+    disconnectUsers, 
+    extractErrorMessage 
+} from '@/utilities/contract';
 
 export default function Navbar(): React.ReactElement
 {

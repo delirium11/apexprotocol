@@ -1,23 +1,20 @@
 @keyframes autoRun 
 {
-    from
-    {
+    from {
         left: 100%;
-    }
-    to
-    {
-        left: -60%; //CHANGE THIS TO CHANGE SPACING
+    } to {
+        left: -50%; //CHANGE THIS TO CHANGE SPACING
     }
 }
 
 .carouselSegment
 {
-    --img-width: 256px; //CHANGE THIS TO CHANGE IMAGE SIZE
+    --img-width: 192px; //CHANGE THIS TO CHANGE IMAGE SIZE
 
     height: var(--img-width);
-
     position: relative;
     overflow-x: clip;
+    margin: 0 20vw;
 
     div
     {
@@ -62,5 +59,35 @@
     {
         animation-play-state: paused;
         filter: grayscale(1);
+    }
+}
+
+@media (max-width: 768px)
+{
+    @keyframes autoRun 
+    {
+        from {
+            left: 100%;
+        } to {
+            left: -60%; //CHANGE THIS TO CHANGE SPACING
+        }
+    }
+
+    .carouselSegment
+    {
+        --img-width: 64px; //CHANGE THIS TO CHANGE IMAGE SIZE
+        margin: 0 2vw;
+    }
+}
+
+@media (min-width: 2560px)
+{
+    @keyframes autoRun 
+    {
+        from {
+            left: 100%;
+        } to {
+            left: -15%; //CHANGE THIS TO CHANGE SPACING
+        }
     }
 }
