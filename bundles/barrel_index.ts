@@ -1,9 +1,9 @@
 //IMAGES
-import mascot from '@/public/images/index_hero/landingMascot.png'
+import placeholder from '@/public/images/index/placeholder.png';
 
 const bundle =
 {
-    mascot
+    placeholder
 }
 
 export default bundle;

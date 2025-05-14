@@ -1,5 +1,11 @@
 @use '../styles/mixins';
 
+@font-face 
+{
+    font-family: Montserrat-Medium;
+    src: url(../public/fonts/Montserrat-Medium.ttf);
+}
+
 .homeContainer
 {
     @include mixins.flex-center(column);
@@ -14,17 +20,140 @@
 
     .catalogContainer
     {
+        @include mixins.flex-center(row);
+        justify-content: space-between;
+        align-items: flex-end;
         width: 100vw;
         height: 30vh;
         background-color: rgba(207, 190, 150, 0.9);
-        border-radius: 2rem;
+        border-top-right-radius: 2rem;
+        border-top-left-radius: 2rem;
+        padding: 0 4rem;
+    
+        a
+        {
+            color: #d7d4cc;
+            font-family: Montserrat-Medium;
+            font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+            background-color: #1d1c1b;
+            padding: .625rem;
+            border-radius: .3125rem;
+            box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+            transition: background-color .1s linear;
+
+            &:hover
+            {
+                background-color: rgb(78, 73, 73);
+            }
+        }
+
+        section
+        {
+            @include mixins.flex-center(row);
+            gap: 2rem;
+
+            &:first-child
+            {
+                @include mixins.flex-center(column);
+                align-items: flex-start;
+                height: 100%;
+                gap: 1.5rem;
+            }
+        }
+
+        p
+        {
+            font-family: Montserrat-Medium;
+            font-size: 1.35rem;
+            width: 42ch;
+        }
+
+        div
+        {
+            border: 2px solid violet;
+            @include mixins.flex-center(column);
+            justify-content: flex-start;
+            background-color: rgba(100, 119, 93, 0.9);
+            border-radius: 1rem;
+            width: 300px;
+            height: 410px;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            gap: 1rem;
+
+            a
+            {
+                font-size: 1rem;
+            }
+
+            p
+            {
+                font-size: 1rem;
+                width: 25ch;
+                text-align: center;
+            }
+
+            img
+            {
+                border: 2px solid yellow;
+                width: 90%;
+                height: auto;
+                border-radius: 1rem;
+            }
+        }
     }
 }
 
-@media (max-width: 768px)
+@media (max-width: 1024px)
 {
     .homeContainer
     {
         margin: 0 auto;
+        height: fit-content;
+    
+        .catalogContainer
+        {
+            @include mixins.flex-center(column);
+            justify-content: flex-start;
+            margin-top: 70svh;
+            height: fit-content;
+            gap: 2rem;
+
+            section
+            {
+                @include mixins.flex-center(column);
+
+                &:first-child
+                {
+                    margin-top: 1rem;
+                    align-items: center;
+
+                    p
+                    {
+                        font-family: Montserrat-Medium;
+                        text-align: center;
+                        font-size: 1rem;
+                        width: 30ch;
+                    }
+                }
+
+                &:last-child
+                {
+                    gap: .5rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 2200px)
+{
+    .homeContainer
+    {
+        .catalogContainer
+        {
+            justify-content: center;
+            gap: 25vw;
+        }
     }
 }
