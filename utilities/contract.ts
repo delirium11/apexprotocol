@@ -1,20 +1,21 @@
+import keccak256 from "keccak256";
+import MerkleTree from "merkletreejs";
+import contractABI from '@/data/contractABI.json';
+import contractState from '@/data/contractState.json';
+import whitelist from "@/data/whitelistedUsers.json";
+import { parseAbi } from 'viem';
 import 
 { 
-    ethers, 
+    ethers,
+    Result,  
     Network, 
     Contract, 
     Interface, 
     JsonRpcSigner, 
+    JsonRpcProvider, 
     WebSocketProvider, 
     BrowserProvider 
 } from 'ethers';
-import keccak256 from "keccak256";
-import MerkleTree from "merkletreejs";
-import whitelist from "@/data/whitelistedUsers.json";
-import contractABI from '@/data/contractABI.json';
-import { Result } from 'ethers';
-import { JsonRpcProvider } from 'ethers';
-import { parseAbi } from 'viem';
 
 //Contract instance used for sending transactions.
 export interface InitContract
@@ -75,16 +76,10 @@ export function progressBar (totalSupply: bigint, maxSupply: bigint): ProgressSt
         percentage = Math.min(100, Math.max(0, ratio) * 100)
     }
 
-    const fillColor = 'lightblue';
-    const emptyColor = '#f5f0e4';
+    const fill = `${'lightblue'} ${percentage}%`;
+    const empty = `${'#f5f0e4'} ${percentage}%`;
 
-    const fillStop = `${fillColor} ${percentage}%`;
-    const emptyStop = `${emptyColor} ${percentage}%`;
-
-    return {
-        background: `linear-gradient(to right, ${fillStop}, ${emptyStop})`,
-        color: 'blue',
-    };
+    return { background: `linear-gradient(to right, ${fill}, ${empty})`, color: 'blue' }
 }
 
 //Error sifter function primarily used for blockchain messages.
@@ -101,38 +96,31 @@ export function extractErrorMessage (error: any): string
 }
 
 //Merkle validation logic that returns a root and proof for the uesr.
-export function merkleValidator (wallet: string): MerkleResults
+export function merkleValidator (wallet: string, addresses: string[]): MerkleResults
 {
-    //The whitelist address array that the tree gets contructed from.
-    const addresses: string[] = whitelist.whitelistAddresses;
-
-    //Sets up the nodes for hashing and tree generation.
-    const nodes = addresses.map(address => keccak256(address));
+    //Sets up the nodes for hashing and generates sorted merkle tree.
+    const nodes = addresses.map(item => keccak256(item));
     const tree = new MerkleTree(nodes, keccak256, {sortPairs: true});
 
-    //Gets the root of the tree and the un-parsed user proof.
+    //Gets the root of the tree and the raw user proof.
     const root = '0x' + tree.getRoot().toString('hex');
     const keys = tree.getProof(keccak256(wallet));
 
     //The parsed user proof gets set here and is returned with the root.
     const proof = keys.map(item => '0x' + item.data.toString('hex'));
+
     return {root, proof};
 }
 
 //If browser provider is already connected fetch user accounts automatically.
-export async function collectUsers(): Promise<string[]>
+export async function collectUsers (): Promise<string[]>
 {
     try
     {
         //Checks for a wallet extension and throws if one is not found.
         if (!window.ethereum) throw new Error('No wallet extension is installed!');
-        return await window.ethereum.request
-        (
-            { 
-                method: 'eth_accounts', 
-                params: [] 
-            }
-        )
+        return await window.ethereum.request 
+            ({ method: 'eth_accounts', params: [] })
     } catch (error: any)
     {
         //Attempts to throw/log a legible error message.
@@ -141,19 +129,14 @@ export async function collectUsers(): Promise<string[]>
 }
 
 //Function to trigger the browser provider so user can connect.
-export async function connectUsers(): Promise<void>
+export async function connectUsers (): Promise<void>
 {
     try
     {
         //Checks for a wallet extension and throws if one is not found.
         if (!window.ethereum) throw new Error('No wallet extension is installed!');
-        await window.ethereum.request
-        (
-            { 
-                method: "eth_requestAccounts", 
-                params: []
-            }
-        )
+        return await window.ethereum.request 
+            ({ method: "eth_requestAccounts", params: [] })
     } catch (error: any)
     {
         //Attempts to throw/log a legible error message.
@@ -162,19 +145,14 @@ export async function connectUsers(): Promise<void>
 }
 
 //If user is currently connected allow them to disconnect.
-export async function disconnectUsers(): Promise<string[]>
+export async function disconnectUsers (): Promise<string[]>
 {
     try
     {
         //Checks for a wallet extension and throws if one is not found.
         if (!window.ethereum) throw new Error('No wallet extension is installed!');
-        return await window.ethereum.request
-        (
-            { 
-                method: "wallet_revokePermissions", 
-                params: [{ eth_accounts: {} }]
-            }
-        )
+        return await window.ethereum.request 
+            ({ method: "wallet_revokePermissions", params: [{ eth_accounts: {} }] })
     } catch (error: any)
     {
         //Attempts to throw/log a legible error message.
@@ -183,28 +161,22 @@ export async function disconnectUsers(): Promise<string[]>
 }
 
 //Add the network to user's browser extension.
-export async function addNetwork(): Promise<void>
-{
+export async function addNetwork (): Promise<void>
+{   
     try
     {
-        const config: ChainConfig =
-        {
-            chainId: '0x' + (11124).toString(16),
-            chainName: 'Abstract Sepolia Testnet',
-            rpcUrls: ['https://api.testnet.abs.xyz'],
-            blockExplorerUrls: ['https://sepolia.abscan.org/'],
-            nativeCurrency: { symbol: 'ETH', decimals: 18 },
-        }
+        //Chain specific identifiers/config variables.
+        const chainId: string = '0x' + (11124).toString(16);
+        const chainName: string = 'Abstract Sepolia Testnet';
+        const rpcUrls: string[] = ['https://api.testnet.abs.xyz'];
+        const blockExplorerUrls: string[] = ['https://sepolia.abscan.org/'];
+        const nativeCurrency = { symbol: 'ETH', decimals: 18 };
+        const config = [chainId, chainName, rpcUrls, blockExplorerUrls, nativeCurrency];
 
         //Checks for a wallet extension and throws if one is not found.
         if (!window.ethereum) throw new Error('No wallet extension is installed!');
-        return await window.ethereum.request
-        (
-            {
-                method: 'wallet_addEthereumChain',
-                params: [config]
-            }
-        )
+        return await window.ethereum.request 
+            ({ method: 'wallet_addEthereumChain', params: [config] })
     } catch (error: any)
     {
         //Attempts to throw/log a legible error message.
@@ -214,22 +186,17 @@ export async function addNetwork(): Promise<void>
 }
 
 //Function to trigger when the user is on the wrong target network.
-export async function switchNetwork(): Promise<void>
+export async function switchNetwork (): Promise<void>
 {
     try
     {
         //Checks for a wallet extension and throws if one is not found.
         if (!window.ethereum) throw new Error('No wallet extension is installed!');
+        const chain_id: string = '0x' + (11124).toString(16);
 
         //Attempt to switch the network to target chain.
-        await window.ethereum.request
-        (
-            {
-                method: 'wallet_switchEthereumChain', 
-                params: [{chainId: '0x' + (11124).toString(16)}]
-            }
-        )
-
+        return await window.ethereum.request
+            ({ method: 'wallet_switchEthereumChain', params: [{chainId: chain_id}] })
     } catch (error: any)
     {
         //Attemp to add the target chain if it's not already added.
@@ -239,7 +206,7 @@ export async function switchNetwork(): Promise<void>
 }
 
 //Set up for multicall contract and event listener contract.
-export async function readContract(): Promise<ContractState | undefined>
+export async function readContract (): Promise<ContractState | undefined>
 {
     try
     {
@@ -253,28 +220,17 @@ export async function readContract(): Promise<ContractState | undefined>
 
         //Create an interface, a provider and a contract instance to bundle the requests.
         const provider: WebSocketProvider = new ethers.WebSocketProvider(wssrpcurl);
-        const ABIInterface: Interface = new ethers.Interface(contractABI);
         const contract: Contract = new ethers.Contract(contractAddr, contractABI, provider);
+        const ABIInterface: Interface = new ethers.Interface(contractABI);
 
         //State data to be retreived from the logic contract.
-        const state: string[] =
-        [
-            'owner', 
-            'maxSupply', 
-            'totalSupply', 
-            'whitelistMintLimit', 
-            'publicMintLimit', 
-            'whitelistMintPrice', 
-            'publicMintPrice', 
-            'whitelistMintState', 
-            'publicMintState', 
-            'tradingState' 
-        ]
+        const state: string[] = contractState.stateData;
 
-        //ABI encoded function names to be sent to the multicall contract.
+        //ABI encoded function names to be sent.
         const encodedStateData: string[] = [];
 
-        for (let i = 0; i < state.length; i++)
+        //Encode each function call and append them to encodedStateData.
+        for (let i = 0; i < state.length; i++) 
         {
             encodedStateData.push (ABIInterface.encodeFunctionData(state[i]))
         }
@@ -292,7 +248,7 @@ export async function readContract(): Promise<ContractState | undefined>
             decodedStateData[state[i]] = decode.length === 1 ? decode[0] : decode;
         }
 
-        return {contract, decodedStateData};
+        return { contract, decodedStateData };
 
     } catch (error: any)
     {
@@ -302,7 +258,7 @@ export async function readContract(): Promise<ContractState | undefined>
 }
 
 //Function that initializes a contract instance and fetches contract data.
-export async function initContract(): Promise<Contract | undefined>
+export async function initContract (): Promise<Contract | undefined>
 {
     try
     {
@@ -326,8 +282,6 @@ export async function initContract(): Promise<Contract | undefined>
         const signer: JsonRpcSigner = await provider.getSigner();
         const contract: Contract = new ethers.Contract(contractAddr, contractABI, signer);
 
-        //Initializes the wallet of the user and returns it with the contract.
-        const wallet: string = await signer.getAddress();
         return contract;
 
     } catch (error: any)
@@ -351,10 +305,8 @@ export async function owner_calls
         //Sends a transaction to the blockchain.
         const transaction = await contract.withdraw();
 
-        //Console logs before and after tx gets mined.
-        console.log('pending');
+        //Wait for the transaction to be mined.
         await transaction.wait();
-        console.log('success');
 
     } catch (error: any)
     {
@@ -385,7 +337,8 @@ export async function whitelist_mint
         const balance: bigint = await provider.getBalance(wallet);
 
         //Checks the user for whitelist validity.
-        const {proof}: MerkleResults = merkleValidator(wallet);
+        const merkle: MerkleResults = merkleValidator(wallet, whitelist.addresses);
+        const proof: string[] = merkle.proof;
         const whitelistStatus: boolean = await contract.whitelistStatus(proof);
 
         //Throw is the user isn't whitelisted or if they don't have enough balance.
@@ -395,10 +348,8 @@ export async function whitelist_mint
         //Sends a transaction to the blockchain.
         const transaction = await contract.whitelistMint(amount, proof, {value: wl_cost});
 
-        //Console logs before and after tx gets mined.
-        console.log('pending');
+        //Wait for the transaction to be mined.
         await transaction.wait();
-        console.log('success');
 
     } catch (error: any)
     {
@@ -430,10 +381,8 @@ export async function public_mint
         //Sends a transaction to the blockchain.
         const transaction = await contract.publicMint(amount, {value: pl_cost});
 
-        //Console logs before and after tx gets mined.
-        console.log('pending');
+        //Wait for the transaction to be mined.
         await transaction.wait();
-        console.log('success');
 
     } catch (error: any)
     {
@@ -467,7 +416,8 @@ export async function whitelistMintAGW
         if (!provider) throw new Error ('Provider not initialized!');
 
         //Grab the users currency balance and proof if they're whitelisted.
-        const proof: string[] = merkleValidator(address).proof;
+        const merkle: MerkleResults = merkleValidator(address, whitelist.addresses);
+        const proof: string[] = merkle.proof;
         const walletBalance: bigint = await provider.getBalance(address);
 
         //Need to check balance prior to triggering mint event for error catching.

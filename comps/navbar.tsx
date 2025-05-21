@@ -99,9 +99,7 @@ export default function Navbar(): React.ReactElement
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
                 >
-                    {
-                        wallet ? (hovered ? 'DISCONNECT' : wallet.slice(-6)) : 'CONNECT'
-                    }
+                    { wallet ? (hovered ? 'DISCONNECT' : wallet.slice(-6)) : 'CONNECT' }
                 </button>
                 <Link href='/'><FaDiscord/></Link>
                 <Link href='/'><FaXTwitter/></Link>

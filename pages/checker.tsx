@@ -1,7 +1,13 @@
 import styles from '@/styles/checker.module.scss';
 import bundle from '@/bundles/barrel_checker';
+import whitelist from "@/data/whitelistedUsers.json";
 import { useState } from 'react';
-import { merkleValidator, extractErrorMessage } from '@/utilities/contract';
+import 
+{ 
+    merkleValidator, 
+    MerkleResults, 
+    extractErrorMessage 
+} from '@/utilities/contract';
 
 export default function Checker(): React.ReactElement
 {
@@ -16,17 +22,23 @@ export default function Checker(): React.ReactElement
 
     async function handleSubmit (event: React.FormEvent<HTMLFormElement>): Promise<void>
     {
+        
         try
         {
             setError(null);
             setWhitelisted(null);
+
             event.preventDefault();
+
             const wrongStart: boolean = !address.startsWith('0x');
             const wrongLength: boolean = address.length !== 42;
             const invalidInput: boolean = wrongStart || wrongLength;
+            const merkle: MerkleResults = merkleValidator(address, whitelist.addresses);
+
             if (!address) throw new Error ('PLEASE PROVIDE A WALLET ADDRESS FIRST');
             if (invalidInput) throw new Error ('PLEASE ENTER A VALID WALLET ADDRESS');
-            setWhitelisted((merkleValidator(address).proof.length > 0));
+            
+            setWhitelisted((merkle.proof.length > 0));
         } catch (error: any)
         {
             setWhitelisted(null);

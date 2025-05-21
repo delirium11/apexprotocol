@@ -4,25 +4,24 @@ import { useEffect, useState } from "react";
 import { useLoginWithAbstract } from '@abstract-foundation/agw-react';
 import { useAbstractClient } from '@abstract-foundation/agw-react';
 import { AbstractProvider } from '@/comps/abstract';
-import { ethers } from 'ethers';
+import { ethers, Contract } from 'ethers';
 import { useAccount } from 'wagmi';
-import { Contract } from 'ethers';
 import 
 { 
     parse, 
-    collectUsers,
-    connectUsers,
-    extractErrorMessage, 
-    switchNetwork, 
+    collectUsers, 
+    connectUsers, 
+    disconnectUsers, 
+    switchNetwork,
+    ContractState, 
     initContract, 
+    readContract, 
     owner_calls, 
     public_mint, 
-    readContract, 
-    whitelist_mint,
-    ContractState,
-    disconnectUsers,
-    whitelistMintAGW,
-    publicMintAGW,
+    publicMintAGW, 
+    whitelist_mint, 
+    whitelistMintAGW, 
+    extractErrorMessage, 
     progressBar
 } from '@/utilities/contract';
 
@@ -324,16 +323,28 @@ function MintLogic(): React.ReactElement
 
             setColor('orange');
             setStatus('Pending transaction!');
-            if (action === 'owner') await owner_calls(writeContract, account);
-            if (action === 'wl_mint') await whitelist_mint(writeContract, account, WLAmnt);
-            if (action === 'pl_mint') await public_mint(writeContract, account, PLAmnt);
+
+            if (action === 'owner')
+            {
+                await owner_calls(writeContract, account);
+            }
+
+            if (action === 'wl_mint')
+            {
+                await whitelist_mint(writeContract, account, WLAmnt);
+            }
+
+            if (action === 'pl_mint')
+            {
+                await public_mint(writeContract, account, PLAmnt);
+            }
+
             setColor('green');
             setStatus('Transaction completed successfully!');
         } catch (error: any)
         {
             //Reset the pending transaction message.
             setStatus(null);
-
             setError(extractErrorMessage(error));
         } finally
         {
@@ -357,8 +368,17 @@ function MintLogic(): React.ReactElement
 
             setColor('orange');
             setStatus('Pending transaction!');
-            if (action === 'wl_mint') await whitelistMintAGW(eventContract, address, agwClient, WLAmnt);
-            if (action === 'pl_mint') await publicMintAGW(eventContract, address, agwClient, PLAmnt);
+            
+            if (action === 'wl_mint') 
+            {
+                await whitelistMintAGW(eventContract, address, agwClient, WLAmnt);
+            }
+
+            if (action === 'pl_mint') 
+            {
+                await publicMintAGW(eventContract, address, agwClient, PLAmnt);
+            }
+
             setColor('green');
             setStatus('Transaction completed successfully!');
 
@@ -366,10 +386,10 @@ function MintLogic(): React.ReactElement
         {
             //Reset the pending transaction message.
             setStatus(null);
+            setError(extractErrorMessage(error));
 
             //Only way to catch the no-funds error before it breaks things.
             if (error.message == 'Not enough funds!') setError(error.message);
-            console.log(extractErrorMessage(error));
         } finally
         {
             setIsLoading(false);
@@ -612,17 +632,8 @@ function MintLogic(): React.ReactElement
                 }
             </section>
 
-            <section>
-                {
-                    status && <p style={{color: color}}>{status}</p>
-                }
-            </section>
-
-            <section>
-                {
-                    error && <p style={{color: 'red'}}>{error}</p>
-                }
-            </section>
+            <section>{ status && <p style={{color: color}}>{status}</p> }</section>
+            <section>{ error && <p style={{color: 'red'}}>{error}</p> }</section>
 
         </main>
     );
