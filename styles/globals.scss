@@ -18,6 +18,12 @@
     src: url(../public/fonts/BebasNeue-Regular.ttf);
 }
 
+@font-face 
+{
+    font-family: Montserrat-Medium;
+    src: url(../public/fonts/Montserrat-Medium.ttf);
+}
+
 ::-webkit-scrollbar
 {
     display: none;
@@ -56,6 +62,7 @@ img
 
 a
 {
+    font-family: Montserrat-Medium;
     text-decoration: none;
     user-select: none;
     cursor: pointer;
@@ -73,5 +80,5 @@ input
 
 button
 {
-    font-family: Roboto-Bold;
+    font-family: Montserrat-Medium;
 }

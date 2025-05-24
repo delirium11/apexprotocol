@@ -1,9 +1,9 @@
 //IMAGES
-import placeholder from '@/public/images/placeholder.png';
+import logo from '@/public/images/navbar/logo.png';
 
 const bundle = 
 {
-    placeholder
+    logo
 }
 
 export default bundle;

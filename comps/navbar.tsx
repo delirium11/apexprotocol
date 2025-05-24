@@ -63,7 +63,7 @@ export default function Navbar(): React.ReactElement
         try
         {
             await disconnectUsers();
-        } catch (error: any)
+        } catch (error: any) 
         {
             console.log(extractErrorMessage(error));
         }
@@ -77,32 +77,30 @@ export default function Navbar(): React.ReactElement
         >
             <ul>
                 <Link href='/'>
-                    <Image 
-                        src={bundle.placeholder} 
-                        draggable={false} 
-                        alt='mascot'
-                    />
+                    <Image src={bundle.logo} draggable={false} alt='mascot'/>
                 </Link>
             </ul>
 
             <ul>
                 <Link href='/'>HOME</Link>
                 <Link href='/about'>ABOUT</Link>
-                <Link href='/faq'>FAQ</Link>
+                <Link href='/whitepaper'>WHITEPAPER</Link>
                 <Link href='/checker'>CHECKER</Link>
                 <Link href='/mint'>MINT</Link>
+                <Link href='/'><FaDiscord/></Link>
+                <Link href='/'><FaXTwitter/></Link>
             </ul>
 
             <ul>
-                <button 
-                    onClick={wallet ? handleDisconnect : handleConnect}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                >
-                    { wallet ? (hovered ? 'DISCONNECT' : wallet.slice(-6)) : 'CONNECT' }
-                </button>
-                <Link href='/'><FaDiscord/></Link>
-                <Link href='/'><FaXTwitter/></Link>
+                <div>
+                    <button 
+                        onClick={wallet ? handleDisconnect : handleConnect}
+                        onMouseEnter={() => setHovered(true)}
+                        onMouseLeave={() => setHovered(false)}
+                    >
+                        { wallet ? (hovered ? 'DISCONNECT' : wallet.slice(-6)) : 'CONNECT' }
+                    </button>
+                </div>
             </ul>
 
         </nav>
