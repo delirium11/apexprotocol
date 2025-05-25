@@ -2,25 +2,7 @@
 
 @font-face 
 {
-    font-family: Bungee-Regular;
-    src: url(../public/fonts/Bungee-Regular.ttf);
-}
-
-@font-face 
-{
-    font-family: Roboto-Bold;
-    src: url(../public/fonts/Roboto-Bold.ttf);
-}
-
-@font-face 
-{
-    font-family: BebasNeue-Regular;
-    src: url(../public/fonts/BebasNeue-Regular.ttf);
-}
-
-@font-face 
-{
-    font-family: Montserrat-Medium;
+    font-family: Montserrat;
     src: url(../public/fonts/Montserrat-Medium.ttf);
 }
 
@@ -40,9 +22,7 @@ html,
 body
 {
     overflow-x: clip;
-    font-family: Roboto-Bold;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: Montserrat-Medium;
 }
 
 html
@@ -50,35 +30,14 @@ html
     scroll-behavior: smooth;
 }
 
-body
-{
-    background-color: white;
-}
-
 img
 {
     display: block;
 }
 
-a
+a, button
 {
-    font-family: Montserrat-Medium;
+    font: inherit;
     text-decoration: none;
-    user-select: none;
     cursor: pointer;
-}
-
-h2
-{
-    font-family: BebasNeue-Regular;
-}
-
-input
-{
-    font-family: Bungee-Regular;
-}
-
-button
-{
-    font-family: Montserrat-Medium;
 }

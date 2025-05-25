@@ -14,7 +14,10 @@ import
 
 export default function Navbar(): React.ReactElement
 {
+    //State variables for displaying the wallet address.
     const [wallet, setWallet] = useState<string | null>(null);
+
+    //State variables for connection interactivity.
     const [hovered, setHovered] = useState<boolean>(false);
 
     useEffect
@@ -41,30 +44,24 @@ export default function Navbar(): React.ReactElement
         }, []
     )
 
-    async function handleWallets(): Promise<void>
+    //Upon component mount check for any connected wallets.
+    async function handleWallets (): Promise<void>
     {
+        //If any wallet is currently connected display it.
         const wallets: string[] = await collectUsers();
-        setWallet(wallets.length > 0 ? wallets[0].toUpperCase() : null);
+        setWallet(wallets.length > 0 ? wallets[0].toUpperCase().slice(-6) : null);
     }
 
-    async function handleConnect(): Promise<void>
+    //Used to gracefully handle breaks if an error occurs.
+    async function handleConnection (): Promise<void>
     {
         try
         {
-            await connectUsers();
+            //Connect if a wallet isn't already and disconnect otherwise.
+            await (wallet ? disconnectUsers() : connectUsers());
         } catch (error: any)
         {
-            console.log(extractErrorMessage(error));
-        }
-    }
-
-    async function handleDisconnect(): Promise<void>
-    {
-        try
-        {
-            await disconnectUsers();
-        } catch (error: any) 
-        {
+            //Gracefully handle any breaking errors.
             console.log(extractErrorMessage(error));
         }
     }
@@ -92,15 +89,13 @@ export default function Navbar(): React.ReactElement
             </ul>
 
             <ul>
-                <div>
-                    <button 
-                        onClick={wallet ? handleDisconnect : handleConnect}
-                        onMouseEnter={() => setHovered(true)}
-                        onMouseLeave={() => setHovered(false)}
-                    >
-                        { wallet ? (hovered ? 'DISCONNECT' : wallet.slice(-6)) : 'CONNECT' }
-                    </button>
-                </div>
+                <button 
+                    onClick={handleConnection}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                >
+                    { wallet ? (hovered ? 'DISCONNECT' : wallet) : 'CONNECT' }
+                </button>
             </ul>
 
         </nav>

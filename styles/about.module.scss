@@ -6,14 +6,20 @@
 
 @font-face 
 {
-    font-family: Poppins-Light;
-    src: url(../public/fonts/Poppins-Light.ttf);
+    font-family: Montserrat-Medium;
+    src: url(../public/fonts/Montserrat-Medium.ttf);
 }
 
 @font-face 
 {
-    font-family: Montserrat-Medium;
-    src: url(../public/fonts/Montserrat-Medium.ttf);
+    font-family: Montserrat-Black;
+    src: url(../public/fonts/Montserrat-Black.ttf);
+}
+
+@font-face 
+{
+    font-family: BebasNeue-Regular;
+    src: url(../public/fonts/BebasNeue-Regular.ttf);
 }
 
 //STYLING
@@ -35,6 +41,7 @@
     border-radius: 10px;
 
     margin: 0 auto;
+    margin-top: 3.5rem;
     
     section
     {
@@ -69,6 +76,7 @@
             font-size: var(--h2-font-size);
 
             margin: auto;
+            font-family: BebasNeue-Regular;
 
             padding: 1.5rem;
             max-width: 25ch;
