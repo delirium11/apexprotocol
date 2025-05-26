@@ -68,14 +68,10 @@ export default function Navbar(): React.ReactElement
 
     return (
 
-        <nav
-            id='navbar'
-            className={styles.navbarContainer}
-        >
+        <nav id='navbar' className={styles.navbarContainer}>
+
             <ul>
-                <Link href='/'>
-                    <Image src={bundle.logo} draggable={false} alt='mascot'/>
-                </Link>
+                <Link href='/'></Link>
             </ul>
 
             <ul>

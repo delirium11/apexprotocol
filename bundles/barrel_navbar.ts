@@ -1,9 +1,9 @@
 //IMAGES
-import logo from '@/public/images/navbar/logo.png';
+import logo_black from '@/public/images/navbar/logo_black.png';
 
 const bundle = 
 {
-    logo
+    logo_black
 }
 
 export default bundle;

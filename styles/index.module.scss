@@ -21,12 +21,12 @@
     section
     {
         width: 100vw;
-        height: 100svh;
     }
 
     .landingContainer
     {
         @include mixins.flex-center(column);
+        height: 100svh;
         position: relative;
         overflow: hidden;
 
@@ -42,8 +42,15 @@
         }
     }
 
+    .midContainer
+    {
+        height: 65svh;
+        background-color: #d0021b;
+    }
+
     .infoContainer
     {
+        height: 100svh;
         background-image: 
             url('../public/images/index/background_3_desktop.png'),
             url('../public/images/index/background_2.png'),
@@ -120,11 +127,6 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
-            
-            video
-            {
-                display: none;
-            }
         }
 
         .infoContainer
