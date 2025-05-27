@@ -1,7 +1,7 @@
 @use '../styles/mixins';
 @use "sass:color";
 
-$bg-color: #fff;
+$bg-color: #000;
 
 @function set-text-color($currentColor) 
 {
@@ -35,12 +35,12 @@ $bg-color: #fff;
     z-index: 10;
     padding: 0 6rem;
     justify-content: space-between;
+    background-color: rgb(0, 0, 0, .35);
 
     ul
     {
         @include mixins.flex-center(row);
         height: 100%;
-        padding: 0 2rem;
         gap: 1rem;
 
         a
@@ -48,8 +48,8 @@ $bg-color: #fff;
             color: set-text-color($bg-color);
             padding: .4rem;
             border-radius: .4rem;
-            text-decoration: none;
             font-size: 1rem;
+            text-decoration: none;
             transition: color .2s ease, background-color .2s ease;
 
             &:nth-child(4), 
@@ -61,8 +61,8 @@ $bg-color: #fff;
 
             &:hover
             {
-                color: white;
-                background-color: black;
+                color: black;
+                background-color: white;
             }
         }
 
@@ -78,8 +78,8 @@ $bg-color: #fff;
 
             &:hover
             {
-                color: white;
-                background-color: black;
+                color: black;
+                background-color: white;
             }
         }
         
@@ -97,6 +97,12 @@ $bg-color: #fff;
                 background-color: transparent;
             }
         }
+
+        &:first-child,
+        &:last-child
+        {
+            width: 192px;
+        }
     }
 }
 
@@ -106,12 +112,11 @@ $bg-color: #fff;
     {
         height: 2rem;
         padding: 0;
-        justify-content: center;
+        justify-content: space-evenly;
 
         ul
         {
             gap: 0;
-            padding: 0;
             width: fit-content;
 
             a, button
@@ -122,6 +127,12 @@ $bg-color: #fff;
             &:first-child a
             {
                 height: 1rem;
+            }
+
+            &:first-child,
+            &:last-child
+            {
+                width: fit-content;
             }
         }
     }
