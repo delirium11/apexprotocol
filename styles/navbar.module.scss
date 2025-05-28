@@ -1,28 +1,26 @@
 @use '../styles/mixins';
 @use "sass:color";
 
-$bg-color: #000;
-
-@function set-text-color($currentColor) 
+.dark a,
+.dark button
 {
-    @if (color.channel($currentColor, "lightness", $space: hsl) > 50)
-    {
-        @return #000;
-    } @else 
-    {
-        @return #fff;
-    }
+    color: black;
 }
 
-@function set-logo-color($currentColor) 
+.bright a, 
+.bright button
 {
-    @if (color.channel($currentColor, "lightness", $space: hsl) > 50)
-    {
-        @return '../public/images/navbar/logo_black.png';
-    } @else 
-    {
-        @return '../public/images/navbar/logo_white.png';
-    }
+    color: white;
+}
+
+.darkBG a
+{
+    background-image: url('../public/images/navbar/logo_black.png');
+}
+
+.brightBG a
+{
+    background-image: url('../public/images/navbar/logo_white.png');
 }
 
 .navbarContainer
@@ -35,7 +33,6 @@ $bg-color: #000;
     z-index: 10;
     padding: 0 6rem;
     justify-content: space-between;
-    background-color: rgb(0, 0, 0, .35);
 
     ul
     {
@@ -45,7 +42,6 @@ $bg-color: #000;
 
         a
         {
-            color: set-text-color($bg-color);
             padding: .4rem;
             border-radius: .4rem;
             font-size: 1rem;
@@ -61,14 +57,13 @@ $bg-color: #000;
 
             &:hover
             {
-                color: black;
-                background-color: white;
+                color: white;
+                background-color: black;
             }
         }
 
         button
         {
-            color: set-text-color($bg-color);
             background-color: transparent;
             border: 0;
             padding: .4rem;
@@ -78,16 +73,15 @@ $bg-color: #000;
 
             &:hover
             {
-                color: black;
-                background-color: white;
+                color: white;
+                background-color: black;
             }
         }
-        
+
         &:first-child a
         {
             height: 2rem;
             aspect-ratio: 1/1;
-            background-image: url(set-logo-color($bg-color));
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;

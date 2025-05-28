@@ -1,10 +1,20 @@
 import styles from '@/styles/index.module.scss';
 import bundle from '@/bundles/barrel_index';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useIntersectionObserver } from '@/effects/animations_index';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
-export default function Home (): React.ReactElement
+interface HomeProps
 {
+    setActiveSection: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function Home ({setActiveSection}: HomeProps): React.ReactElement
+{
+    //Ref to prevent multiple re-renders of the dom.
+    const sectionRef = useRef<HTMLElement | null>(null);
+
+    //State variable to control when to load the video.
     const [showVideo, setShowVideo] = useState<boolean>(false);
 
     useEffect
@@ -17,15 +27,19 @@ export default function Home (): React.ReactElement
         }, []
     )
 
+    //Apply some effects from the animations_index library.
+    useIntersectionObserver(sectionRef, setActiveSection);
+
+    //Do not load video on mobile.
     function checkWindowSize (): void
     {
         setShowVideo(window.innerWidth > 1024);
     }
 
     return (
-        <main id='home' className={styles.homeContainer}>
+        <main className={styles.homeContainer}>
 
-            <section id='landingContainer' className={styles.landingContainer}>
+            <section className={styles.landingContainer} ref={sectionRef}>
                 {
                     showVideo &&
                     <video autoPlay muted loop playsInline>
@@ -34,9 +48,9 @@ export default function Home (): React.ReactElement
                 }
             </section>
 
-            <section id='midContainer' className={styles.midContainer}></section>
+            <section className={styles.midContainer}></section>
 
-            <section id='infoContainer' className={styles.infoContainer}>
+            <section className={styles.infoContainer}>
                 <div>
                     <h1>WE ARE APEX</h1>
                     <p>

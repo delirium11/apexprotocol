@@ -12,7 +12,12 @@ import
     extractErrorMessage 
 } from '@/utilities/contract';
 
-export default function Navbar(): React.ReactElement
+interface NavbarProps
+{
+    activeSection: boolean;
+}
+
+export default function Navbar ({activeSection}: NavbarProps): React.ReactElement
 {
     //State variables for displaying the wallet address.
     const [wallet, setWallet] = useState<string | null>(null);
@@ -70,11 +75,11 @@ export default function Navbar(): React.ReactElement
 
         <nav id='navbar' className={styles.navbarContainer}>
 
-            <ul>
+            <ul className={styles[activeSection ? 'brightBG' : 'darkBG']}>
                 <Link href='/'></Link>
             </ul>
 
-            <ul>
+            <ul className={styles[activeSection ? 'bright' : 'dark']}>
                 <Link href='/'>HOME</Link>
                 <Link href='/about'>ABOUT</Link>
                 <Link href='/whitepaper'>WHITEPAPER</Link>
@@ -84,7 +89,7 @@ export default function Navbar(): React.ReactElement
                 <Link href='/'><FaXTwitter/></Link>
             </ul>
 
-            <ul>
+            <ul className={styles[activeSection ? 'bright' : 'dark']}>
                 <button 
                     onClick={handleConnection}
                     onMouseEnter={() => setHovered(true)}
