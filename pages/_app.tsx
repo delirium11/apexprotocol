@@ -12,7 +12,7 @@ export default function App ({Component, pageProps}: AppProps): React.ReactEleme
     return (
         <>
             <Head>
-                <title>Apex Protocol</title>
+                <title>Apex</title>
                 <meta name="description" content="apex protocol"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
@@ -20,5 +20,5 @@ export default function App ({Component, pageProps}: AppProps): React.ReactEleme
             <Navbar activeSection={activeSection}/>
             <Component {...pageProps} setActiveSection={setActiveSection}/>
         </>
-    ) 
+    )
 }
