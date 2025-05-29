@@ -1,5 +1,5 @@
 //IMAGES
-import placeholder from '@/public/images/index/placeholder.png';
+import placeholder from '@/public/images/about/540.png';
 
 const bundle =
 {

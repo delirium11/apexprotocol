@@ -3,6 +3,7 @@ import bundle from '@/bundles/barrel_index';
 import Image from 'next/image';
 import { useIntersectionObserver } from '@/effects/animations_index';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 interface HomeProps
 {
@@ -48,7 +49,32 @@ export default function Home ({setActiveSection}: HomeProps): React.ReactElement
                 }
             </section>
 
-            <section className={styles.midContainer}></section>
+            <section id='mid' className={styles.midContainer}>
+                <div>
+                    <h5>TITLE WILL BE HERE</h5>
+                    <p>
+                        Apex is a next-gen anime PFP collection.
+                    </p>
+                </div>
+                <div>
+                    <h5>TITLE WILL BE HERE</h5>
+                    <p>
+                        Apex is a next-gen anime PFP collection.
+                    </p>
+                </div>
+                <div>
+                    <h5>TITLE WILL BE HERE</h5>
+                    <p>
+                        Apex is a next-gen anime PFP collection.
+                    </p>
+                </div>
+                <div>
+                    <h5>TITLE WILL BE HERE</h5>
+                    <p>
+                        Apex is a next-gen anime PFP collection.
+                    </p>
+                </div>
+            </section>
 
             <section className={styles.infoContainer}>
                 <div>
@@ -60,8 +86,8 @@ export default function Home ({setActiveSection}: HomeProps): React.ReactElement
                         user-driven customizations. Coming soon to Abstract-Chain!
                     </p>
                     <span>
-                        <button>Whitepaper</button>
-                        <button>Whitelist Form</button>
+                        <Link href='/'>WHITEPAPER</Link>
+                        <Link href='/'>WHITELIST FORM</Link>
                     </span>
                 </div>
             </section>

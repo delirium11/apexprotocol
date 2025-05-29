@@ -44,8 +44,58 @@
 
     .midContainer
     {
-        height: 65svh;
-        background-color: #d0021b;
+        @include mixins.flex-center(row);
+        justify-content: space-evenly;
+        background-image: url('../public/images/index/mid_container_bg.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        overflow-x: clip;
+        padding: 4rem;
+        gap: 4rem;
+
+        div
+        {
+            @include mixins.flex-center(column);
+            justify-content: flex-end;
+            align-items: flex-start;
+            flex-shrink: 0;
+            background: 
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0) 0%, 
+                    rgba(0,0,0,0) 65%, 
+                    rgba(0,0,0,0.9) 100%
+                ), url('../public/images/about/540.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            border-radius: .6rem;
+            padding: 1rem;
+            width: 24rem;
+            height: 32rem;
+            cursor: pointer;
+            transition: scale .2s ease, box-shadow .2s ease;
+
+            &:hover
+            {
+                scale: 1.02;
+                box-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
+            }
+
+            h5
+            {
+                color: white;
+                font-size: 1rem;
+            }
+
+            p
+            {
+                color: white;
+                font-size: 1rem;
+                opacity: .75;
+            }
+        }
     }
 
     .infoContainer
@@ -72,16 +122,14 @@
             h1
             {
                 font-family: Montserrat-Black;
-                font-weight: 900;
-                font-size: clamp(2rem, 3rem, 10rem);
+                font-size: 2rem;
             }
 
             p
             {
-                width: 48ch;
                 font-family: Montserrat-Medium;
-                font-weight: 500;
-                font-size: clamp(.5rem, 1rem, 2rem);
+                font-size: 1rem;
+                max-width: 48ch;
             }
 
             span
@@ -90,26 +138,20 @@
                 display: flex;
                 gap: 1rem;
                 
-                button
+                a
                 {
                     font-family: Montserrat-Medium;
-                    font-weight: 500;
-                    font-size: clamp(0.75rem, 1rem, 2rem);
-                    margin: 0 auto;
+                    font-size: 1rem;
                     color: white;
-                    display: inline-block;
                     padding: .6rem;
                     background-color: black;
-                    border: 0;
                     border-radius: 0.4rem;
-                    cursor: pointer;
-                    user-select: none;
                     transition: color .2s ease, background-color .2s ease;
                 
                     &:hover 
                     {
                         color: white;
-                        background-color: rgb(122, 59, 59);
+                        background-color: rgba(0, 0, 0, 0.75);
                     }
                 }
             }
@@ -127,6 +169,26 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+        }
+
+        .midContainer
+        {
+            overflow-x: scroll;
+            justify-content: flex-start;
+            padding: 2rem;
+            gap: 2rem;
+
+            div
+            {
+                width: 18rem;
+                height: 24rem;
+                flex-shrink: 0;
+
+                p, a
+                {
+                    font-size: .8rem;
+                }
+            }
         }
 
         .infoContainer
