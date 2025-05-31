@@ -26,8 +26,8 @@
 
 .aboutPage
 {
-    --h2-font-size: 5.625rem;
-    --p-font-size: 1.25rem;
+    --h2-font-size: 2rem;
+    --p-font-size: 1rem;
 
     display: flex;
     flex-direction: row;
@@ -35,14 +35,15 @@
     padding-top: 50px;
 
     max-width: 1800px;
-    width: 95vw;
+    width: 85vw;
 
     border: 1px solid rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 
     margin: 0 auto;
     margin-top: 3.5rem;
-    
+    scroll-margin-top: 3.5rem;
+
     section
     {
         max-height: 800px;
@@ -54,8 +55,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
 
-        max-width: 1100px;
+        max-width: 1000px;
         width: 100%;
 
         border-top: 1px solid rgba(0, 0, 0, 0.25);
@@ -63,44 +65,36 @@
 
         div
         {
-            width: 100%;
-
-            &:first-child
-            {
-                border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-            }
-        }
-
-        h2
-        {
-            font-size: var(--h2-font-size);
-
-            margin: auto;
-            font-family: BebasNeue-Regular;
-
-            padding: 1.5rem;
-            max-width: 25ch;
-        
-            text-align: center;
-        }
-
-        p
-        {
-            font-size: var(--p-font-size);
-            font-family: Montserrat-Medium;
-            text-align: center;
-            padding: 1.35rem;
-        }
-
-        img
-        {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 2rem;
 
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-
-            margin: 0 auto;
+            h2
+            {
+                font-size: var(--h2-font-size);
+                font-family: Montserrat-Black;
+                text-align: center;
+                max-width: 75%;
+            }
+    
+            p
+            {
+                font-size: var(--p-font-size);
+                font-family: Montserrat-Medium;
+                text-align: center;
+                max-width: 75%;
+            }
+    
+            img
+            {
+                margin-top: 2rem;
+                display: flex;
+                width: 50%;
+                height: auto;
+            }
         }
     }
 
@@ -111,7 +105,7 @@
         flex-direction: column;
         align-items: flex-start;
 
-        max-width: 700px;
+        max-width: 800px;
         width: 100%;
 
         padding: 10px;
@@ -141,7 +135,7 @@
                 max-width: 250px;
                 height: auto;
 
-                margin: 10px;                    
+                margin: 10px 15px;                    
                 border-radius: 5px;
 
                 filter: grayscale(1);
@@ -187,7 +181,7 @@
     {
         margin-top: 2rem;
 
-        --h2-font-size: 3rem;
+        --h2-font-size: 2rem;
         --p-font-size: 1rem;
 
         flex-direction: column;
@@ -202,6 +196,22 @@
         .aboutSectionLeft
         {
             border-right: 0;
+
+            div
+            {
+                gap: 1rem;
+                padding: 1rem;
+
+                h2, p
+                {
+                    max-width: 100%;
+                }
+
+                img
+                {
+                    margin-top: 0;
+                }
+            }
         }
 
         .aboutSectionRight

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useIntersectionObserver } from '@/effects/animations_index';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import About from './about';
 
 interface HomeProps
 {
@@ -41,6 +42,8 @@ export default function Home ({setActiveSection}: HomeProps): React.ReactElement
         <main className={styles.homeContainer}>
 
             <section className={styles.landingContainer} ref={sectionRef}>
+                <Link href='/'>WATCH</Link>
+                
                 {
                     showVideo &&
                     <video autoPlay muted loop playsInline>
@@ -49,34 +52,57 @@ export default function Home ({setActiveSection}: HomeProps): React.ReactElement
                 }
             </section>
 
-            <section id='mid' className={styles.midContainer}>
-                <div>
-                    <h5>TITLE WILL BE HERE</h5>
-                    <p>
-                        Apex is a next-gen anime PFP collection.
-                    </p>
-                </div>
-                <div>
-                    <h5>TITLE WILL BE HERE</h5>
-                    <p>
-                        Apex is a next-gen anime PFP collection.
-                    </p>
-                </div>
-                <div>
-                    <h5>TITLE WILL BE HERE</h5>
-                    <p>
-                        Apex is a next-gen anime PFP collection.
-                    </p>
-                </div>
-                <div>
-                    <h5>TITLE WILL BE HERE</h5>
-                    <p>
-                        Apex is a next-gen anime PFP collection.
-                    </p>
-                </div>
+            <section id='midTitle' className={styles.midTitleContainer}>
+                <h1>TOGETHER, WE BUILD</h1>
+                <p>description will appear here</p>
             </section>
 
-            <section className={styles.infoContainer}>
+            <section id='mid' className={styles.midContainer}>
+                <div>
+                    <h5>AWAKENING</h5>
+                    <p>
+                        At the origin of every system lies something older than 
+                        code… an idea. That idea became our beginning. The Awakening.
+                    </p>
+                </div>
+                <div>
+                    <h5>THE CALLING</h5>
+                    <p>
+                        We are Apex. This is a call to all Apex across the chain. 
+                        We are here and we are waiting.
+                    </p>
+                </div>
+                <div>
+                    <h5>INITIATION</h5>
+                    <p>
+                        Every path begins somewhere. In Apex, it begins with one 
+                        click. One mint.
+                    </p>
+                </div>
+                {/* <div>
+                    <h5>RECODE</h5>
+                    <p>
+                        When old tokens fade, new visions rise. Mutate, 
+                        Adopt, Re-code your Apex
+                    </p>
+                </div>
+                <div>
+                    <h5>VYRE</h5>
+                    <p>
+                        Connect. Influence. Earn.
+                    </p><br/>
+                </div>
+                <div>
+                    <h5>THE UNKNOWN</h5>
+                    <p>
+                        Everything beyond 2026 is classified.
+                    </p><br/>
+                </div> */}
+            </section>
+
+            <About/>
+
+            <section id='more' className={styles.infoContainer}>
                 <div>
                     <h1>WE ARE APEX</h1>
                     <p>
@@ -90,6 +116,18 @@ export default function Home ({setActiveSection}: HomeProps): React.ReactElement
                         <Link href='/'>WHITELIST FORM</Link>
                     </span>
                 </div>
+            </section>
+
+            <section id='footer' className={styles.footerContainer}>
+                <Link href='/'>
+                    <Image 
+                        src={bundle.whiteLogo} 
+                        alt='nft37' 
+                        priority={true} 
+                        draggable={false}
+                    />
+                </Link>
+                
             </section>
         
         </main>

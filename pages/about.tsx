@@ -34,11 +34,8 @@ export default function About (): React.ReactElement
 
                 <div>
                     <h2>
-                        MANIFESTO FOR THE APEX PREDATORS OF TOMORROW
+                        OUR PLAN FOR THE APEX PREDATORS OF TOMORROW
                     </h2>
-                </div>
-
-                <div>
                     <p>
                         Apex is a community-driven, next-gen anime PFP collection 
                         that redefines digital identity through high-quality, 
@@ -56,9 +53,6 @@ export default function About (): React.ReactElement
                         <br/><br/>
                         Join our Discord and stake your place at the top of the food chain.
                     </p>
-                </div>
-
-                <div>
                     <Image src={ApexTB} alt='aboutBanner' priority={true} draggable={false}/>
                 </div>
 
