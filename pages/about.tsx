@@ -76,7 +76,7 @@ export default function About (): React.ReactElement
                 </svg>
                 <div>
                     <div>
-                        <Image src={nft37} alt='nft37'priority={true} draggable={false}/>
+                        <Image src={nft37}  alt='nft37'  priority={true} draggable={false}/>
                         <Image src={nft170} alt='nft170' priority={true} draggable={false}/>
                         <Image src={nft241} alt='nft241' priority={true} draggable={false}/>
                         <Image src={nft257} alt='nft257' priority={true} draggable={false}/>

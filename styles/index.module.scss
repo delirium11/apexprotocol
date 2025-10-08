@@ -115,25 +115,35 @@
             {
                 @include mixins.flex-center(column);
                 justify-content: flex-end;
+                position: relative;
+                isolation: isolate;
                 align-items: flex-start;
                 flex-shrink: 0;
-                background: 
-                    linear-gradient(
-                        to bottom, 
-                        rgba(0,0,0,0) 0%, 
-                        rgba(0,0,0,0) 65%, 
-                        rgba(0,0,0,1) 100%
-                    ), 
-                    url('../public/images/about/540.png');
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
                 border-radius: .6rem;
                 padding: 1rem;
                 width: 34rem;
                 aspect-ratio: 16/10;
                 cursor: pointer;
                 transition: scale .2s ease;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0; // Fills the entire parent div
+                    z-index: -1; // Sits behind the div's content (h5, p)
+                    border-radius: inherit; // Inherit the parent's border-radius
+
+                    // 3. Add the transition and transform here
+                    transition: transform .1s ease;
+                    transform: perspective(1000px) 
+                            rotateX(var(--rotateAboutImageX, 0deg)) 
+                            rotateY(var(--rotateAboutImageY, 0deg));
+
+                    // --- ...and put all background properties here ---
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                }
     
                 &:hover
                 {
@@ -151,6 +161,100 @@
                     color: white;
                     font-size: 1rem;
                     opacity: .75;
+                }
+            }
+
+            &:first-child
+            {
+                div
+                {
+                    &:nth-child(1)::before
+                    {
+                        background: 
+                            linear-gradient(
+                                to bottom, 
+                                rgba(0,0,0,0) 0%, 
+                                rgba(0,0,0,0) 65%, 
+                                rgba(0,0,0,1) 100%
+                            ), 
+                            url('../public/images/index/Parallax/01/01viallayer2.png'),
+                            url('../public/images/index/Parallax/01/01bg.png');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                    }
+
+                    &:nth-child(2)::before
+                    {
+                        background: 
+                            linear-gradient(
+                                to bottom, 
+                                rgba(0,0,0,0) 0%, 
+                                rgba(0,0,0,0) 65%, 
+                                rgba(0,0,0,1) 100%
+                            ), 
+                            url('../public/images/index/Parallax/02/apex.png'),
+                            url('../public/images/index/Parallax/02/buildings.png'),
+                            url('../public/images/index/Parallax/02/backcitypng.png');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                    }
+
+                    &:nth-child(3)::before
+                    {
+                        background: 
+                            linear-gradient(
+                                to bottom, 
+                                rgba(0,0,0,0) 0%, 
+                                rgba(0,0,0,0) 65%, 
+                                rgba(0,0,0,1) 100%
+                            ), 
+                            url('../public/images/index/Parallax/03/apexlayer4.png'),
+                            url('../public/images/index/Parallax/03/screenslayer3.png'),
+                            url('../public/images/index/Parallax/03/monitorlayer2.png'),
+                            url('../public/images/index/Parallax/03/bglayer1.png');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                    }
+                }
+            }
+
+            &:last-child
+            {
+                div
+                {
+                    &:nth-child(1)
+                    {
+                        background: 
+                            linear-gradient(
+                                to bottom, 
+                                rgba(0,0,0,0) 0%, 
+                                rgba(0,0,0,0) 65%, 
+                                rgba(0,0,0,1) 100%
+                            ), 
+                            url('../public/images/index/Parallax/04/04.png');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                    }
+
+                    &:nth-child(2)
+                    {
+                        background: 
+                            linear-gradient(
+                                to bottom, 
+                                rgba(0,0,0,0) 0%, 
+                                rgba(0,0,0,0) 65%, 
+                                rgba(0,0,0,1) 100%
+                            ), 
+                            url('../public/images/index/Parallax/05/05phone.png'),
+                            url('../public/images/index/Parallax/05/05bg.png');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                    }
                 }
             }
         }

@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import About from './about';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
+import { cardsAnimator } from '@/effects/animations_index';
 
 interface HomeProps
 {
@@ -27,6 +28,7 @@ export default function Home ({setActiveSection}: HomeProps): React.ReactElement
     (
         () =>
         {
+            cardsAnimator();
             checkWindowSize();
             window.addEventListener('resize', checkWindowSize);
             return () => window.removeEventListener('resize', checkWindowSize);
@@ -76,14 +78,14 @@ export default function Home ({setActiveSection}: HomeProps): React.ReactElement
 
             <section id='mid' className={styles.midContainer} ref={scrollContainerRef}>
                 <span>
-                    <div>
+                    <div className={styles.cardContainer}>
                         <h5>AWAKENING</h5>
                         <p>
                             At the origin of every system lies something older than 
                             code… an idea. That idea became our beginning. The Awakening.
                         </p>
                     </div>
-                    <div>
+                    <div className={styles.cardContainer}>
                         <h5>THE CALLING</h5>
                         <p>
                             We are Apex. This is a call to all Apex across the chain. 
