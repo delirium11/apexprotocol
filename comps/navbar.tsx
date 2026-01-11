@@ -85,6 +85,7 @@ export default function Navbar ({activeSection}: NavbarProps): React.ReactElemen
                 <Link href='/#about'>ABOUT</Link>
                 <Link href='/'>WHITEPAPER</Link>
                 <Link href='/#more'>MORE</Link>
+                <Link href='/game'>GAME</Link>
                 {/* <Link href='/checker'>CHECKER</Link>
                 <Link href='/mint'>MINT</Link> */}
                 <Link href='/'><FaDiscord/></Link>

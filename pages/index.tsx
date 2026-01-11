@@ -78,47 +78,146 @@ export default function Home ({setActiveSection}: HomeProps): React.ReactElement
 
             <section id='mid' className={styles.midContainer} ref={scrollContainerRef}>
                 <span>
-                    <div className={styles.cardContainer}>
-                        <h5>AWAKENING</h5>
-                        <p>
-                            At the origin of every system lies something older than 
-                            code… an idea. That idea became our beginning. The Awakening.
-                        </p>
+                    {/* ⬇️ UPDATED: Card 1 */}
+                    <div className={styles.card}>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/01/01bg.png')" }}
+                            data-depth="0.075"
+                        ></div>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/01/01viallayer2.png')" }}
+                            data-depth="0.125"
+                        ></div>
+                        <div className={styles.cardGradient}></div>
+                        <div className={styles.cardContent}>
+                            <h5>AWAKENING</h5>
+                            <p>
+                                At the origin of every system lies something older than 
+                                code… an idea. That idea became our beginning. The Awakening.
+                            </p>
+                        </div>
                     </div>
-                    <div className={styles.cardContainer}>
-                        <h5>THE CALLING</h5>
-                        <p>
-                            We are Apex. This is a call to all Apex across the chain. 
-                            We are here and we are waiting.
-                        </p>
+                    {/* ⬇️ UPDATED: Card 2 */}
+                    <div className={styles.card}>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/02/backcitypng.png')" }}
+                            data-depth="0.075"
+                        ></div>
+                         <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/02/buildings.png')" }}
+                            data-depth="0.125"
+                        ></div>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/02/apex.png')" }}
+                            data-depth="0.225"
+                        ></div>
+                        <div className={styles.cardGradient}></div>
+                        <div className={styles.cardContent}>
+                            <h5>THE CALLING</h5>
+                            <p>
+                                We are Apex. This is a call to all Apex across the chain. 
+                                We are here and we are waiting.
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h5>INITIATION</h5>
-                        <p>
-                            Every path begins somewhere. In Apex, it begins with one 
-                            click. One mint.
-                        </p>
+                    {/* ⬇️ UPDATED: Card 3 */}
+                    <div className={styles.card}>
+                         <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/03/bglayer1.png')" }}
+                            data-depth="0.05"
+                        ></div>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/03/monitorlayer2.png')" }}
+                            data-depth="0.1"
+                        ></div>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/03/screenslayer3.png')" }}
+                            data-depth="0.15"
+                        ></div>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/03/apexlayer4.png')" }}
+                            data-depth="0.2"
+                        ></div>
+                        <div className={styles.cardGradient}></div>
+                        <div className={styles.cardContent}>
+                            <h5>INITIATION</h5>
+                            <p>
+                                Every path begins somewhere. In Apex, it begins with one 
+                                click. One mint.
+                            </p>
+                        </div>
                     </div>
                 </span>
                 <span>
-                    <div>
-                        <h5>RECODE</h5>
-                        <p>
-                            When old tokens fade, new visions rise. Mutate, 
-                            Adopt, Re-code your Apex
-                        </p>
+                    {/* ⬇️ UPDATED: Card 4 */}
+                    <div className={styles.card}>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/04/bg.png')" }}
+                            data-depth="0.075"
+                        ></div>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/04/vial.png')" }}
+                            data-depth="0.125"
+                        ></div>
+                        <div className={styles.cardGradient}></div>
+                        <div className={styles.cardContent}>
+                            <h5>RECODE</h5>
+                            <p>
+                                When old tokens fade, new visions rise. Mutate, 
+                                Adopt, Re-code your Apex
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h5>VYRE</h5>
-                        <p>
-                            Connect. Influence. Earn.
-                        </p><br/>
+                    {/* ⬇️ UPDATED: Card 5 */}
+                    <div className={styles.card}>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/05/bg.png')" }}
+                            data-depth="0.075"
+                        ></div>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/05/scnd.png')" }}
+                            data-depth="0.125"
+                        ></div>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/05/thrd.png')" }}
+                            data-depth="0.17~5"
+                        ></div>
+                        <div className={styles.cardGradient}></div>
+                        <div className={styles.cardContent}>
+                            <h5>VYRE</h5>
+                            <p>
+                                Connect. Influence. Earn.
+                            </p><br/>
+                        </div>
                     </div>
-                    <div>
-                        <h5>THE UNKNOWN</h5>
-                        <p>
-                            Everything beyond 2026 is classified.
-                        </p><br/>
+                     {/* ⬇️ UPDATED: Card 6 */}
+                    <div className={styles.card}>
+                        <div 
+                            className={styles.cardLayer} 
+                            style={{ backgroundImage: "url('/images/index/Parallax/06/ftr.png')" }}
+                            data-depth="0.175"
+                        ></div>
+                        <div className={styles.cardGradient}></div>
+                        <div className={styles.cardContent}>
+                            <h5>THE UNKNOWN</h5>
+                            <p>
+                                Everything beyond 2027 is classified.
+                            </p><br/>
+                        </div>
                     </div>
                 </span>
             </section>

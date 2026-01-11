@@ -111,149 +111,86 @@
             width: 100%;
             flex-shrink: 0;
 
-            div
+            // ⬇️ UPDATED: This is the new card container
+            .card
             {
-                @include mixins.flex-center(column);
-                justify-content: flex-end;
+                // Core styles moved from the old 'div'
                 position: relative;
                 isolation: isolate;
-                align-items: flex-start;
                 flex-shrink: 0;
                 border-radius: .6rem;
-                padding: 1rem;
                 width: 34rem;
                 aspect-ratio: 16/10;
                 cursor: pointer;
-                transition: scale .2s ease;
+                opacity: .65;
+                transition: scale .2s ease, opacity .2s ease;
+                overflow: hidden; // Important: clip the layers
 
-                &::before {
-                    content: '';
-                    position: absolute;
-                    inset: 0; // Fills the entire parent div
-                    z-index: -1; // Sits behind the div's content (h5, p)
-                    border-radius: inherit; // Inherit the parent's border-radius
-
-                    // 3. Add the transition and transform here
-                    transition: transform .1s ease;
-                    transform: perspective(1000px) 
-                            rotateX(var(--rotateAboutImageX, 0deg)) 
-                            rotateY(var(--rotateAboutImageY, 0deg));
-
-                    // --- ...and put all background properties here ---
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: cover;
-                }
-    
                 &:hover
                 {
                     scale: 1.02;
+                    opacity: 1;
                 }
+
+                // ⬇️ NEW: Style for the image layers
+                .cardLayer
+                {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 1;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    border-radius: inherit; // Inherit the card's border radius
+                    
+                    // The JS will control these variables
+                    transition: transform .1s ease;
+                    transform: perspective(1000px) 
+                            translateY(var(--translateY, 0px)) 
+                            translateX(var(--translateX, 0px))
+                            scale(1.1);
+                }
+
+                // ⬇️ NEW: Style for the gradient overlay
+                .cardGradient
+                {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 2; // Above images
+                    border-radius: inherit;
+                    background: linear-gradient(
+                        to bottom, 
+                        rgba(0,0,0,0) 0%, 
+                        rgba(0,0,0,0) 65%, 
+                        rgba(0,0,0,1) 100%
+                    );
+                }
+
+                // ⬇️ NEW: Style for the text content
+                .cardContent
+                {
+                    // Flex properties moved from old 'div'
+                    @include mixins.flex-center(column);
+                    justify-content: flex-end;
+                    align-items: flex-start;
+                    
+                    position: relative;
+                    z-index: 3; // On top of everything
+                    padding: 1rem;
+                    width: 100%;
+                    height: 100%;
     
-                h5
-                {
-                    color: white;
-                    font-size: 1rem;
-                }
-    
-                p
-                {
-                    color: white;
-                    font-size: 1rem;
-                    opacity: .75;
-                }
-            }
-
-            &:first-child
-            {
-                div
-                {
-                    &:nth-child(1)::before
+                    h5
                     {
-                        background: 
-                            linear-gradient(
-                                to bottom, 
-                                rgba(0,0,0,0) 0%, 
-                                rgba(0,0,0,0) 65%, 
-                                rgba(0,0,0,1) 100%
-                            ), 
-                            url('../public/images/index/Parallax/01/01viallayer2.png'),
-                            url('../public/images/index/Parallax/01/01bg.png');
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        background-size: cover;
+                        color: white;
+                        font-size: 1rem;
                     }
-
-                    &:nth-child(2)::before
+        
+                    p
                     {
-                        background: 
-                            linear-gradient(
-                                to bottom, 
-                                rgba(0,0,0,0) 0%, 
-                                rgba(0,0,0,0) 65%, 
-                                rgba(0,0,0,1) 100%
-                            ), 
-                            url('../public/images/index/Parallax/02/apex.png'),
-                            url('../public/images/index/Parallax/02/buildings.png'),
-                            url('../public/images/index/Parallax/02/backcitypng.png');
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        background-size: cover;
-                    }
-
-                    &:nth-child(3)::before
-                    {
-                        background: 
-                            linear-gradient(
-                                to bottom, 
-                                rgba(0,0,0,0) 0%, 
-                                rgba(0,0,0,0) 65%, 
-                                rgba(0,0,0,1) 100%
-                            ), 
-                            url('../public/images/index/Parallax/03/apexlayer4.png'),
-                            url('../public/images/index/Parallax/03/screenslayer3.png'),
-                            url('../public/images/index/Parallax/03/monitorlayer2.png'),
-                            url('../public/images/index/Parallax/03/bglayer1.png');
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        background-size: cover;
-                    }
-                }
-            }
-
-            &:last-child
-            {
-                div
-                {
-                    &:nth-child(1)
-                    {
-                        background: 
-                            linear-gradient(
-                                to bottom, 
-                                rgba(0,0,0,0) 0%, 
-                                rgba(0,0,0,0) 65%, 
-                                rgba(0,0,0,1) 100%
-                            ), 
-                            url('../public/images/index/Parallax/04/04.png');
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        background-size: cover;
-                    }
-
-                    &:nth-child(2)
-                    {
-                        background: 
-                            linear-gradient(
-                                to bottom, 
-                                rgba(0,0,0,0) 0%, 
-                                rgba(0,0,0,0) 65%, 
-                                rgba(0,0,0,1) 100%
-                            ), 
-                            url('../public/images/index/Parallax/05/05phone.png'),
-                            url('../public/images/index/Parallax/05/05bg.png');
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        background-size: cover;
+                        color: white;
+                        font-size: 1rem;
+                        opacity: .75;
                     }
                 }
             }

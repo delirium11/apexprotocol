@@ -36,35 +36,60 @@ export function useIntersectionObserver
     )
 }
 
-//ANIMATIONS TO BE APPLIED TO THE CARDS IN THE INDEX PAGE
 export function cardsAnimator(): void
 {
-    const container = Array.from(document.querySelectorAll<HTMLElement>('div'))
+    // 1. Select the main card containers
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('#mid > span > div')); // This selector still works!
 
-    function handleMouseMove (e: MouseEvent, div: HTMLElement)
+    function handleMouseMove (e: MouseEvent, card: HTMLElement)
     {
-        const rect = div.getBoundingClientRect();
+        const rect = card.getBoundingClientRect();
         
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
-        const offsetX = (e.clientX - centerX) / rect.width;
-        const offsetY = (e.clientY - centerY) / rect.height;
+        // 2. Calculate the base rotation based on cursor position
+        const baseOffsetX = (e.clientX - centerX) / rect.width;
+        const baseOffsetY = (e.clientY - centerY) / rect.height;
 
-        div.style.setProperty('--rotateAboutImageY', `${offsetX * 25}deg`);
-        div.style.setProperty('--rotateAboutImageX', `${offsetY * -25}deg`);
+        // 3. Find all layers *inside this specific card*
+        const layers = Array.from(card.querySelectorAll<HTMLElement>('[data-depth]'));
+
+        // 4. Loop over each layer and apply a scaled transform
+        for (const layer of layers)
+        {
+            // Get the depth, default to 0.5 if not specified
+            const depth = parseFloat(layer.dataset.depth || '0.5'); 
+            
+            // Calculate scaled rotation. Bigger 'depth' = more movement
+            // The '25' is the max rotation angle, feel free to change it
+            const offsetX = baseOffsetX * 80 * depth;
+            const offsetY = baseOffsetY * 80 * depth;
+
+            // 5. Set the CSS variables *on the layer itself*
+            layer.style.setProperty('--translateX', `${offsetX}px`);
+            layer.style.setProperty('--translateY', `${offsetY}px`);
+        }
     }
 
-    function resetRotation (div: HTMLElement) 
+    function resetTransform (card: HTMLElement) 
     {
-        div.style.removeProperty('--rotateAboutImageY');
-        div.style.removeProperty('--rotateAboutImageX');
+        // 1. Find all layers inside this card
+        const layers = Array.from(card.querySelectorAll<HTMLElement>('[data-depth]'));
+
+        // 2. Loop and reset properties for each layer
+        for (const layer of layers)
+        {
+            layer.style.removeProperty('--translateX');
+            layer.style.removeProperty('--translateY');
+        }
     }
 
-    for (let i = 0; i < container.length; i++) 
+    // 3. Attach listeners to the main *card* elements
+    for (let i = 0; i < cards.length; i++) 
     {
-        const div = container[i];
-        div.addEventListener('mousemove', (e) => handleMouseMove(e, div));
-        div.addEventListener('mouseleave', () => resetRotation(div));
+        const card = cards[i];
+        card.addEventListener('mousemove', (e) => handleMouseMove(e, card));
+        card.addEventListener('mouseleave', () => resetTransform(card));
     }
 }
